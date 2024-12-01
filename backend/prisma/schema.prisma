@@ -28,7 +28,7 @@ model User {
   password      String
   role          Role       @default(User)
   referalcode   String?    @unique
-  referal       Referal?   @relation("UserReferal")
+  referal       Referal?   @relation()
   points        Int        @default(0)
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
@@ -41,7 +41,7 @@ model Referal {
   id        Int      @id @default(autoincrement())
   code      String   @unique
   ownerId   Int      @unique  
-  owner     User     @relation("UserReferal", fields: [ownerId], references: [id])
+  owner     User     @relation(fields: [ownerId], references: [id])
   points    Int      @default(0)
   expiredAt DateTime
 }
