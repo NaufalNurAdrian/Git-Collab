@@ -22,25 +22,25 @@ enum EventCategory {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  role      Role     @default(User)
-  referalId Int?     @unique
-  referal   Referal?
-  points    Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  tickets   Ticket[]
-  events    Event[]
-  reviews   Review[]
+  id            Int        @id @default(autoincrement())
+  username      String     @unique
+  email         String     @unique
+  password      String
+  role          Role       @default(User)
+  referalcode   String?    @unique
+  referal       Referal?   @relation()
+  points        Int        @default(0)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  tickets       Ticket[]
+  events        Event[]
+  reviews       Review[]
 }
 
 model Referal {
   id        Int      @id @default(autoincrement())
   code      String   @unique
-  ownerId   Int      @unique
+  ownerId   Int      @unique  
   owner     User     @relation(fields: [ownerId], references: [id])
   points    Int      @default(0)
   expiredAt DateTime
