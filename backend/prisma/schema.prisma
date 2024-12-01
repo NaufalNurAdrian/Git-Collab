@@ -3,8 +3,70 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum RoleUser {
+  User
+  Admin
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  avatar    String?
+  role      RoleUser @default(User)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Event     Event[]
+  referal   Referal  @relation(fields: [referalId], references: [id])
+  referalId Int
+}
+
+model Referal {
+  id      Int      @id @default(autoincrement())
+  point   Int
+  code    String
+  expierd DateTime
+  User    User[]
+}
+
+enum Category {
+  Concert
+  Festival
+  Sports
+  Theater
+  Education
+  Other
+}
+
+model Event {
+  event_id       Int         @id @default(autoincrement())
+  event_name     String
+  poster         String
+  description_id Description @relation(fields: [Description_id], references: [description_id])
+  userId         Int
+  user           User        @relation(fields: [userId], references: [id])
+  startPrice     Int
+  date           DateTime
+  time           DateTime
+  location       String
+  categoty       Category
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  rating         Int
+  Description_id Int
+}
+
+model Description {
+  description_id Int     @id @default(autoincrement())
+  description    String
+  terms          Json
+  Event          Event[]
 }
 
 enum Role {
