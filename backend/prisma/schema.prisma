@@ -3,39 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-enum RoleUser {
+enum Role {
   User
-  Admin
+  Organizer
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  avatar    String?
-  role      RoleUser @default(User)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Event     Event[]
-  referal   Referal  @relation(fields: [referalId], references: [id])
-  referalId Int
-}
-
-model Referal {
-  id      Int      @id @default(autoincrement())
-  point   Int
-  code    String
-  expierd DateTime
-  User    User[]
-}
-
-enum Category {
+enum EventCategory {
   Concert
   Festival
   Sports
@@ -44,27 +21,66 @@ enum Category {
   Other
 }
 
-model Event {
-  event_id       Int         @id @default(autoincrement())
-  event_name     String
-  poster         String
-  description_id Description @relation(fields: [Description_id], references: [description_id])
-  userId         Int
-  user           User        @relation(fields: [userId], references: [id])
-  startPrice     Int
-  date           DateTime
-  time           DateTime
-  location       String
-  categoty       Category
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  rating         Int
-  Description_id Int
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      Role     @default(User)
+  referalId Int?     @unique
+  referal   Referal?
+  points    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tickets   Ticket[]
+  events    Event[]
+  reviews   Review[]
 }
 
-model Description {
-  description_id Int     @id @default(autoincrement())
-  description    String
-  terms          Json
-  Event          Event[]
+model Referal {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  ownerId   Int      @unique
+  owner     User     @relation(fields: [ownerId], references: [id])
+  points    Int      @default(0)
+  expiredAt DateTime
+}
+
+model Event {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  location    String
+  date        DateTime
+  time        DateTime
+  category    EventCategory
+  price       Int
+  isFree      Boolean       @default(false)
+  organizerId Int
+  organizer   User          @relation(fields: [organizerId], references: [id])
+  tickets     Ticket[]
+  reviews     Review[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Ticket {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  eventId   Int
+  event     Event    @relation(fields: [eventId], references: [id])
+  price     Int
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  eventId   Int
+  event     Event    @relation(fields: [eventId], references: [id])
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
 }
