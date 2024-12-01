@@ -65,13 +65,22 @@ model Event {
 }
 
 model Ticket {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  eventId   Int
-  event     Event    @relation(fields: [eventId], references: [id])
-  price     Int
-  createdAt DateTime @default(now())
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+  eventId       Int
+  event         Event       @relation(fields: [eventId], references: [id])
+  price         Int
+  createdAt     DateTime    @default(now())
+  description   Description @relation(fields: [descriptionId], references: [id])
+  descriptionId Int
+}
+
+model Description {
+  id          Int      @id @default(autoincrement())
+  description String
+  terms       Json
+  Ticket      Ticket[]
 }
 
 model Review {
