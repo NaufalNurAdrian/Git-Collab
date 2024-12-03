@@ -11,6 +11,9 @@ app.get("/api", (req: Request, res: Response) => {
     res.status(200).send("Welcome to my API")
 })
 
+console.log(process.env.DATABASE_URL);
+
+
 app.listen(PORT, () => {
     console.log(`server running on -> http://localhost:${PORT}/api`);
 })

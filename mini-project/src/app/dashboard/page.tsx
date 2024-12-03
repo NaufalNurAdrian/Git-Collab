@@ -1,20 +1,35 @@
-export default function Dashboard() {
+import DashboardHeader from "@/components/dashboarHeader";
+import Sidebar from "@/components/sidebar";
+
+export default function Home() {
   return (
-    <div className="container">
-      <div className="w-screen flex flex-row">
-        <div className="flex flex-col w-[20%] h-screen bg-nobel p-2">
-          <div className="flex justify-center py-2 text-codgray font-extrabold text-3xl">
-            <p className="text-red">Festify</p>Tix
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-1 bg-gray-100">
+        <DashboardHeader />
+        <div className="p-6">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+            <div className="bg-white shadow p-4 rounded">
+              <h3 className="font-bold text-lg">Event Aktif</h3>
+              <p>0 Event</p>
+            </div>
+            <div className="bg-white shadow p-4 rounded">
+              <h3 className="font-bold text-lg">Event Draft</h3>
+              <p>0 Event</p>
+            </div>
+            <div className="bg-white shadow p-4 rounded">
+              <h3 className="font-bold text-lg">Total Transaksi</h3>
+              <p>Rp 0</p>
+            </div>
+            <div className="bg-white shadow p-4 rounded">
+              <h3 className="font-bold text-lg">Total Tiket Terjual</h3>
+              <p>0 Tiket</p>
+            </div>
+            <div className="bg-white shadow p-4 rounded">
+              <h3 className="font-bold text-lg">Total Pengunjung</h3>
+              <p>0 Orang</p>
+            </div>
           </div>
-          <div className="font-bold">
-            Dashboard
-            
-          </div>
-        </div>
-
-        <div className="flex w-[80%] bg-slate-200">
-            hallo
-
         </div>
       </div>
     </div>
