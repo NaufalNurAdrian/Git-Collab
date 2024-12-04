@@ -2,26 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: whitesmoke;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Styling Swiper Pagination Bullet */
+.swiper-pagination-bullet {
+  background-color: #ffffff !important; /* Warna putih */
+  opacity: 0.6 !important; /* Transparansi */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffffff !important; /* Warna putih */
+  opacity: 1 !important; /* Tidak transparan */
 }
