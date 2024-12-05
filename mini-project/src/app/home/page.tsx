@@ -1,3 +1,4 @@
+import CardEvent from "@/components/cardevent";
 import Carousel from "@/components/carousel";
 import CategoryCards from "@/components/categorycard";
 
@@ -9,6 +10,9 @@ export default function HomePage() {
       </div>
       <div>
         <CategoryCards />
+      </div>
+      <div>
+        <CardEvent />
       </div>
     </main>
   );

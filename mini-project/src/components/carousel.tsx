@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules"; // Pastikan Autoplay diimpor
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
@@ -20,7 +20,7 @@ export default function Carousel() {
   return (
     <div className="w-full flex justify-center py-8 bg-red relative group">
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Autoplay]} // Tambahkan Autoplay di sini
         navigation={{
           prevEl: ".prev-btn",
           nextEl: ".next-btn",
@@ -28,11 +28,11 @@ export default function Carousel() {
         pagination={{
           clickable: true,
         }}
-        loop
         autoplay={{
-          delay: 4000, // Slide akan pindah setiap 15 detik
-          disableOnInteraction: false, // Jangan menghentikan autoplay ketika pengguna berinteraksi
+          delay: 5000, // Slide akan pindah setiap 5 detik
+          disableOnInteraction: true, // Jangan menghentikan autoplay ketika pengguna berinteraksi
         }}
+        loop
         className="relative w-[95%] max-w-[1200px] h-[300px] rounded-lg overflow-visible"
       >
         {/* Gambar Carousel */}
