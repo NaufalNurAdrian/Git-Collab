@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 bg-gray-100">
+      <div className="flex-1">
         <DashboardHeader />
         <div className="p-6">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">

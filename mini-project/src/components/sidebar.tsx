@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function Sidebar () {
   return (
-    <div className="bg-nobel h-screen w-40 p-5">
-      <div className="text-xl font-bold mb-8">
-        FestifyTix
-        </div>
+    <div className="bg-codgray text-white rounded-r-xl h-screen w-52 p-5 hidden lg:block">
+      <div className="text-3xl font-extrabold mb-8 text-red ">
+        Festify.
+      </div>
       <div>
         <div className="mb-4">
           <Link href="/dashboard" className="hover:text-white">
