@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SessionProvider } from "@/components/context/useSession";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,8 +30,17 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        >
+        <SessionProvider>
         {children}
+        <ToastContainer
+        draggable
+        closeOnClick
+        autoClose={5000}
+        theme="dark"
+        position="bottom-right"
+        />
+        </SessionProvider>
       </body>
     </html>
   );
